@@ -62,8 +62,8 @@ int main() {
 	gen.seed(0);
 	
 	/* Load in MNIST data */
-	ReadTrainingDataFromFile("patch60000_train.txt", "label60000_train.txt");
-	ReadTestingDataFromFile("patch10000_test.txt", "label10000_test.txt");
+	ReadTrainingDataFromFile("train60000.txt", "label60000_train.txt");
+	ReadTestingDataFromFile("test10000.txt", "label10000_test.txt");
 
 	/* Initialization of synaptic array from input to hidden layer */
 	//arrayIH->Initialization<IdealDevice>();
