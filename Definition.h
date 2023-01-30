@@ -53,7 +53,10 @@ std::vector< std::vector<double> >
 weight1(param->nHide, std::vector<double>(param->nInput));
 /* Weights from hidden layer to output layer */
 std::vector< std::vector<double> >
-weight2(param->nOutput, std::vector<double>(param->nHide));
+weight2(param->nOutput, std::vector<double>(param->nHide2));
+/* Weights from hidden layer to second hidden layer*/
+std::vector< std::vector<double> >
+weight3(param->nHide2, std::vectpr<double>(param->nHide));
 
 /* Weight change of weight1 */
 std::vector< std::vector<double> >
@@ -61,7 +64,11 @@ deltaWeight1(param->nHide, std::vector<double>(param->nInput));
 
 /* Weight change of weight2 */
 std::vector< std::vector<double> >
-deltaWeight2(param->nOutput, std::vector<double>(param->nHide));
+deltaWeight2(param->nOutput, std::vector<double>(param->nHide2));
+
+/* Weight change of weight3*/
+std::vector< std::vector<double> >
+deltaWeight3(param->nHide2, std::vector<double>(param->nHide));
 
 /*the variables to track the ΔW*/
 std::vector< std::vector<double> >
@@ -70,9 +77,14 @@ std::vector< std::vector<double> >
 totalDeltaWeight1_abs(param->nHide, std::vector<double>(param->nInput));
 /*the variables to track the ΔW*/
 std::vector< std::vector<double> >
-totalDeltaWeight2(param->nOutput, std::vector<double>(param->nHide));
+totalDeltaWeight2(param->nOutput, std::vector<double>(param->nHide2));
 std::vector< std::vector<double> >
-totalDeltaWeight2_abs(param->nOutput, std::vector<double>(param->nHide));
+totalDeltaWeight2_abs(param->nOutput, std::vector<double>(param->nHide2));
+/*the variables to track the ΔW*/
+std::vector< std::vector<double> >
+totalDeltaWeight3(param->nHide2, std::vector<double>(param->nHide));
+std::vector< std::vector<double> >
+totalDeltaWeight3_abs(param->nHide2, std::vector<double>(param->nHide));
 
 /* Inputs of testing set */
 std::vector< std::vector<double> >
@@ -92,16 +104,21 @@ dTestInput(param->numMnistTestImages, std::vector<int>(param->nInput));
 std::vector< std::vector<double> > 
 gradSquarePrev1(param->nHide, std::vector<double>(param->nInput));
 std::vector< std::vector<double> >
-gradSquarePrev2(param->nOutput, std::vector<double>(param->nHide));
+gradSquarePrev2(param->nOutput, std::vector<double>(param->nHide2));
+std::vector< std::vector<double> >
+gradSquarePrev3(param->nHide2, std::vector<double>(param->nHide));
 std::vector< std::vector<double> > 
 gradSum1(param->nHide, std::vector<double>(param->nInput));
 std::vector< std::vector<double> >
-gradSum2(param->nOutput, std::vector<double>(param->nHide));
+gradSum2(param->nOutput, std::vector<double>(param->nHide2));
+std::vector< std::vector<double> >
+gradSum3(param->nHide2, std::vector<double>(param->nHide));
 std::vector< std::vector<double> >
 momentumPrev1(param->nHide, std::vector<double>(param->nInput));
 std::vector< std::vector<double> >
-momentumPrev2(param->nOutput, std::vector<double>(param->nHide));
-
+momentumPrev2(param->nOutput, std::vector<double>(param->nHide2));
+std::vector< std::vector<double> >
+momentumPrev3(param->nHide2, std::vector<double>(param->nHide));
 
 /* # of correct prediction */
 int correct = 0;
@@ -109,7 +126,10 @@ int correct = 0;
 /* Synaptic array between input and hidden layer */
 Array *arrayIH = new Array(param->nHide, param->nInput, param->arrayWireWidth);
 /* Synaptic array between hidden and output layer */
-Array *arrayHO = new Array(param->nOutput, param->nHide, param->arrayWireWidth);
+Array *arrayHO = new Array(param->nOutput, param->nHide2, param->arrayWireWidth);
+/* Synaptic array between hidden and output layer */
+Array *arrayHH = new Array(param->nHide2, param->nHide, param->arrayWireWidth);
+
 
 /* Random number generator engine */
 std::mt19937 gen;
@@ -117,6 +137,7 @@ std::mt19937 gen;
 /* NeuroSim */
 SubArray *subArrayIH;   // NeuroSim synaptic core for arrayIH
 SubArray *subArrayHO;   // NeuroSim synaptic core for arrayHO
+SubArray *subArrayHH;   // NeuroSim synaptic core for arrayHH
 /* Global properties of subArrayIH */
 InputParameter inputParameterIH;
 Technology techIH;
@@ -125,6 +146,10 @@ MemCell cellIH;
 InputParameter inputParameterHO;
 Technology techHO;
 MemCell cellHO;
+/* Global properties of subArrayHH */
+InputParameter inputParameterHH;
+Technology techHH;
+MemCell cellHH;
 /* Neuron peripheries below subArrayIH */
 Adder adderIH(inputParameterIH, techIH, cellIH);
 Mux muxIH(inputParameterIH, techIH, cellIH);
@@ -137,3 +162,9 @@ Mux muxHO(inputParameterHO, techHO, cellHO);
 RowDecoder muxDecoderHO(inputParameterHO, techHO, cellHO);
 DFF dffHO(inputParameterHO, techHO, cellHO);
 Subtractor subtractorHO(inputParameterHO, techHO, cellHO);
+/* Neuron peripheries below subArrayHH */
+Adder adderHH(inputParameterHH, techHH, cellHH);
+Mux muxHH(inputParameterHH, techHH, cellHH);
+RowDecoder muxDecoderHH(inputParameterHH, techHH, cellHH);
+DFF dffHH(inputParameterHH, techHH, cellHH);
+Subtractor subtractorHH(inputParameterHH, techHH, cellHH);

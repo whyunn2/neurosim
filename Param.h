@@ -57,6 +57,7 @@ public:
 	int nInput;     // # of neurons in input layer
 	int nHide;      // # of neurons in hidden layer
 	int nOutput;	// # of neurons in output layer
+	int nHide2;	    //// # of neurons in second hidden layer
 	double alpha1;		// Learning rate for the synapses from input to hidden layer
 	double alpha2;		// Learning rate for the synapses from hidden to output layer
 	double maxWeight;	// Upper bound of weight value
