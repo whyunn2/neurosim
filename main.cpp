@@ -73,7 +73,7 @@ int main() {
 	//arrayIH->Initialization<DigitalNVM>(param->numWeightBit,true);
 	//arrayIH->Initialization<HybridCell>(); // the 3T1C+2PCM cell
 	//arrayIH->Initialization<_2T1F>();
-
+	arrayHH->Initialization<RealDevice>();
 	
 	/* Initialization of synaptic array from hidden to output layer */
 	//arrayHO->Initialization<IdealDevice>();
@@ -90,41 +90,53 @@ int main() {
 	NeuroSimSubArrayInitialize(subArrayIH, arrayIH, inputParameterIH, techIH, cellIH);
 	param->relaxArrayCellWidth = 1;
 	NeuroSimSubArrayInitialize(subArrayHO, arrayHO, inputParameterHO, techHO, cellHO);
+
+	NeuroSimSubArrayInitialize(subArrayHH, arrayHH, inputParameterHH, techHH, cellHH);
 	/* Calculate synaptic core area */
 	NeuroSimSubArrayArea(subArrayIH);
 	NeuroSimSubArrayArea(subArrayHO);
+	NeuroSimSubArrayArea(subArrayHH);
 	
 	/* Calculate synaptic core standby leakage power */
 	NeuroSimSubArrayLeakagePower(subArrayIH);
 	NeuroSimSubArrayLeakagePower(subArrayHO);
+	NeuroSimSubArrayLeakagePower(subArrayHH);
 	
 	/* Initialize the neuron peripheries */
 	NeuroSimNeuronInitialize(subArrayIH, inputParameterIH, techIH, cellIH, adderIH, muxIH, muxDecoderIH, dffIH, subtractorIH);
 	NeuroSimNeuronInitialize(subArrayHO, inputParameterHO, techHO, cellHO, adderHO, muxHO, muxDecoderHO, dffHO, subtractorHO);
+	NeuroSimNeuronInitialize(subArrayHH, inputParameterHH, techHH, cellHH, adderHH, muxHH, muxDecoderHH, dffHH, subtractorHH);
 	/* Calculate the area and standby leakage power of neuron peripheries below subArrayIH */
 	double heightNeuronIH, widthNeuronIH;
 	NeuroSimNeuronArea(subArrayIH, adderIH, muxIH, muxDecoderIH, dffIH, subtractorIH, &heightNeuronIH, &widthNeuronIH);
 	double leakageNeuronIH = NeuroSimNeuronLeakagePower(subArrayIH, adderIH, muxIH, muxDecoderIH, dffIH, subtractorIH);
+	/* Calculate the area and standby leakage power of neuron peripheries below subArrayIH */
+	double heightNeuronHH, widthNeuronHH;
+	NeuroSimNeuronArea(subArrayHH, adderHH, muxHH, muxDecoderHH, dffHH, subtractorHH, &heightNeuronHH, &widthNeuronHH);
+	double leakageNeuronHH = NeuroSimNeuronLeakagePower(subArrayHH, adderHH, muxHH, muxDecoderHH, dffHH, subtractorHH);
 	/* Calculate the area and standby leakage power of neuron peripheries below subArrayHO */
 	double heightNeuronHO, widthNeuronHO;
 	NeuroSimNeuronArea(subArrayHO, adderHO, muxHO, muxDecoderHO, dffHO, subtractorHO, &heightNeuronHO, &widthNeuronHO);
 	double leakageNeuronHO = NeuroSimNeuronLeakagePower(subArrayHO, adderHO, muxHO, muxDecoderHO, dffHO, subtractorHO);
 	
 	/* Print the area of synaptic core and neuron peripheries */
-	double totalSubArrayArea = subArrayIH->usedArea + subArrayHO->usedArea;
+	double totalSubArrayArea = subArrayIH->usedArea + subArrayHO->usedArea + subArrayHH->usedArea;
 	double totalNeuronAreaIH = adderIH.area + muxIH.area + muxDecoderIH.area + dffIH.area + subtractorIH.area;
+	double totalNeuronAreaHH = adderHH.area + muxHH.area + muxDecoderHH.area + dffHH.area + subtractorHH.area;
 	double totalNeuronAreaHO = adderHO.area + muxHO.area + muxDecoderHO.area + dffHO.area + subtractorHO.area;
 	printf("Total SubArray (synaptic core) area=%.4e m^2\n", totalSubArrayArea);
-	printf("Total Neuron (neuron peripheries) area=%.4e m^2\n", totalNeuronAreaIH + totalNeuronAreaHO);
-	printf("Total area=%.4e m^2\n", totalSubArrayArea + totalNeuronAreaIH + totalNeuronAreaHO);
+	printf("Total Neuron (neuron peripheries) area=%.4e m^2\n", totalNeuronAreaIH + totalNeuronAreaHO + totalNeuronAreaHH);
+	printf("Total area=%.4e m^2\n", totalSubArrayArea + totalNeuronAreaIH + totalNeuronAreaHO + totalNeuronAreaHH);
 
 	/* Print the standby leakage power of synaptic core and neuron peripheries */
 	printf("Leakage power of subArrayIH is : %.4e W\n", subArrayIH->leakage);
+	printf("Leakage power of subArrayHH is : %.4e W\n", subArrayHH->leakage);
 	printf("Leakage power of subArrayHO is : %.4e W\n", subArrayHO->leakage);
 	printf("Leakage power of NeuronIH is : %.4e W\n", leakageNeuronIH);
+	printf("Leakage power of NeuronHH is : %.4e W\n", leakageNeuronHH);
 	printf("Leakage power of NeuronHO is : %.4e W\n", leakageNeuronHO);
-	printf("Total leakage power of subArray is : %.4e W\n", subArrayIH->leakage + subArrayHO->leakage);
-	printf("Total leakage power of Neuron is : %.4e W\n", leakageNeuronIH + leakageNeuronHO);
+	printf("Total leakage power of subArray is : %.4e W\n", subArrayIH->leakage + subArrayHO->leakage + subArrayHH->leakage);
+	printf("Total leakage power of Neuron is : %.4e W\n", leakageNeuronIH + leakageNeuronHO + leakageNeuronHH);
 	
 	/* Initialize weights and map weights to conductances for hardware implementation */
 	WeightInitialize();
@@ -147,18 +159,18 @@ int main() {
 		
 		printf("Accuracy at %d epochs is : %.2f%\n", i*param->interNumEpochs, (double)correct/param->numMnistTestImages*100);
 		/* Here the performance metrics of subArray also includes that of neuron peripheries (see Train.cpp and Test.cpp) */
-		printf("\tRead latency=%.4e s\n", subArrayIH->readLatency + subArrayHO->readLatency);
-		printf("\tWrite latency=%.4e s\n", subArrayIH->writeLatency + subArrayHO->writeLatency);
-		printf("\tRead energy=%.4e J\n", arrayIH->readEnergy + subArrayIH->readDynamicEnergy + arrayHO->readEnergy + subArrayHO->readDynamicEnergy);
-		printf("\tWrite energy=%.4e J\n", arrayIH->writeEnergy + subArrayIH->writeDynamicEnergy + arrayHO->writeEnergy + subArrayHO->writeDynamicEnergy);
+		printf("\tRead latency=%.4e s\n", subArrayIH->readLatency + subArrayHO->readLatency + subArrayHH->readLatency);
+		printf("\tWrite latency=%.4e s\n", subArrayIH->writeLatency + subArrayHO->writeLatency + subArrayHH->writeLatency);
+		printf("\tRead energy=%.4e J\n", arrayIH->readEnergy + subArrayIH->readDynamicEnergy + arrayHO->readEnergy + subArrayHO->readDynamicEnergy + arrayHH->readEnergy + subArrayHH->readDynamicEnergy);
+		printf("\tWrite energy=%.4e J\n", arrayIH->writeEnergy + subArrayIH->writeDynamicEnergy + arrayHO->writeEnergy + subArrayHO->writeDynamicEnergy + arrayHH->writeEnergy + subArrayHH->writeDynamicEnergy);
 		if(HybridCell* temp = dynamic_cast<HybridCell*>(arrayIH->cell[0][0])){
-            printf("\tTransfer latency=%.4e s\n", subArrayIH->transferLatency + subArrayHO->transferLatency);
+            printf("\tTransfer latency=%.4e s\n", subArrayIH->transferLatency + subArrayHO->transferLatency + subArrayHH->transferLatency);
             printf("\tTransfer latency=%.4e s\n", subArrayIH->transferLatency);	
-            printf("\tTransfer energy=%.4e J\n", arrayIH->transferEnergy + subArrayIH->transferDynamicEnergy + arrayHO->transferEnergy + subArrayHO->transferDynamicEnergy);
+            printf("\tTransfer energy=%.4e J\n", arrayIH->transferEnergy + subArrayIH->transferDynamicEnergy + arrayHO->transferEnergy + subArrayHO->transferDynamicEnergy + arrayHH->transferEnergy + subArrayHH->transferDynamicEnergy);
         }
         else if(_2T1F* temp = dynamic_cast<_2T1F*>(arrayIH->cell[0][0])){
             printf("\tTransfer latency=%.4e s\n", subArrayIH->transferLatency);	
-            printf("\tTransfer energy=%.4e J\n", arrayIH->transferEnergy + subArrayIH->transferDynamicEnergy + arrayHO->transferEnergy + subArrayHO->transferDynamicEnergy);
+            printf("\tTransfer energy=%.4e J\n", arrayIH->transferEnergy + subArrayIH->transferDynamicEnergy + arrayHO->transferEnergy + subArrayHO->transferDynamicEnergy + arrayHH->transferEnergy + subArrayHH->transferDynamicEnergy);
          }
         // printf("\tThe total weight update = %.4e\n", totalWeightUpdate);
         // printf("\tThe total pulse number = %.4e\n", totalNumPulse);

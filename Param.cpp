@@ -55,11 +55,12 @@ Param::Param() {
 	nOutput = 10;     // # of neurons in output layer
 	alpha1 = 0.4;	// Learning rate for the weights from input to hidden layer
 	alpha2 = 0.2;	// Learning rate for the weights from hidden to output layer
+	alpha3 = 0.1;    //// Learning rate for the weights from hidden to second hidden layer
 	maxWeight = 1;	// Upper bound of weight value
 	minWeight = -1;	// Lower bound of weight value
 
 	nHide2 = 128;
-	
+
 	/*Optimization method 
 	Available option include: "SGD", "Momentum", "Adagrad", "RMSprop" and "Adam"*/
 	optimization_type = "SGD";

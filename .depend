@@ -30,21 +30,6 @@ NeuroSim.o: NeuroSim.cpp NeuroSim.h NeuroSim/InputParameter.h \
  NeuroSim/Subtractor.h NeuroSim/constant.h NeuroSim/formula.h Param.h
 Param.o: Param.cpp Param.h
 IO.o: IO.cpp formula.h Param.h Cell.h Array.h
-Mapping.o: Mapping.cpp Param.h Array.h Cell.h NeuroSim.h \
- NeuroSim/InputParameter.h NeuroSim/typedef.h NeuroSim/MemCell.h \
- NeuroSim/Technology.h NeuroSim/SubArray.h NeuroSim/InputParameter.h \
- NeuroSim/Technology.h NeuroSim/MemCell.h NeuroSim/formula.h \
- NeuroSim/FunctionUnit.h NeuroSim/Adder.h NeuroSim/RowDecoder.h \
- NeuroSim/Mux.h NeuroSim/WLDecoderOutput.h NeuroSim/DFF.h \
- NeuroSim/VoltageSenseAmp.h NeuroSim/Precharger.h NeuroSim/SenseAmp.h \
- NeuroSim/DecoderDriver.h NeuroSim/SRAMWriteDriver.h \
- NeuroSim/ReadCircuit.h NeuroSim/SwitchMatrix.h NeuroSim/ShiftAdd.h \
- NeuroSim/Subtractor.h NeuroSim/MultilevelSenseAmp.h \
- NeuroSim/CurrentSenseAmp.h NeuroSim/MultilevelSAEncoder.h \
- NeuroSim/WLNewDecoderDriver.h NeuroSim/constant.h \
- NeuroSim/NewSwitchMatrix.h NeuroSim/Adder.h NeuroSim/Mux.h \
- NeuroSim/RowDecoder.h NeuroSim/DFF.h NeuroSim/Subtractor.h
-Cell.o: Cell.cpp formula.h Array.h Cell.h
 main.o: main.cpp Cell.h Array.h formula.h NeuroSim.h \
  NeuroSim/InputParameter.h NeuroSim/typedef.h NeuroSim/MemCell.h \
  NeuroSim/Technology.h NeuroSim/SubArray.h NeuroSim/InputParameter.h \
@@ -60,6 +45,21 @@ main.o: main.cpp Cell.h Array.h formula.h NeuroSim.h \
  NeuroSim/NewSwitchMatrix.h NeuroSim/Adder.h NeuroSim/Mux.h \
  NeuroSim/RowDecoder.h NeuroSim/DFF.h NeuroSim/Subtractor.h Param.h IO.h \
  Train.h Test.h Mapping.h Definition.h
+Mapping.o: Mapping.cpp Param.h Array.h Cell.h NeuroSim.h \
+ NeuroSim/InputParameter.h NeuroSim/typedef.h NeuroSim/MemCell.h \
+ NeuroSim/Technology.h NeuroSim/SubArray.h NeuroSim/InputParameter.h \
+ NeuroSim/Technology.h NeuroSim/MemCell.h NeuroSim/formula.h \
+ NeuroSim/FunctionUnit.h NeuroSim/Adder.h NeuroSim/RowDecoder.h \
+ NeuroSim/Mux.h NeuroSim/WLDecoderOutput.h NeuroSim/DFF.h \
+ NeuroSim/VoltageSenseAmp.h NeuroSim/Precharger.h NeuroSim/SenseAmp.h \
+ NeuroSim/DecoderDriver.h NeuroSim/SRAMWriteDriver.h \
+ NeuroSim/ReadCircuit.h NeuroSim/SwitchMatrix.h NeuroSim/ShiftAdd.h \
+ NeuroSim/Subtractor.h NeuroSim/MultilevelSenseAmp.h \
+ NeuroSim/CurrentSenseAmp.h NeuroSim/MultilevelSAEncoder.h \
+ NeuroSim/WLNewDecoderDriver.h NeuroSim/constant.h \
+ NeuroSim/NewSwitchMatrix.h NeuroSim/Adder.h NeuroSim/Mux.h \
+ NeuroSim/RowDecoder.h NeuroSim/DFF.h NeuroSim/Subtractor.h
+Cell.o: Cell.cpp formula.h Array.h Cell.h
 Test.o: Test.cpp formula.h Param.h Array.h Cell.h Mapping.h NeuroSim.h \
  NeuroSim/InputParameter.h NeuroSim/typedef.h NeuroSim/MemCell.h \
  NeuroSim/Technology.h NeuroSim/SubArray.h NeuroSim/InputParameter.h \
@@ -80,6 +80,9 @@ WLNewDecoderDriver.o: NeuroSim/WLNewDecoderDriver.cpp NeuroSim/constant.h \
  NeuroSim/InputParameter.h NeuroSim/MemCell.h
 formula.o: NeuroSim/formula.cpp NeuroSim/constant.h NeuroSim/formula.h \
  NeuroSim/Technology.h NeuroSim/typedef.h NeuroSim/../Param.h
+Mux.o: NeuroSim/Mux.cpp NeuroSim/constant.h NeuroSim/formula.h \
+ NeuroSim/Technology.h NeuroSim/typedef.h NeuroSim/Mux.h \
+ NeuroSim/InputParameter.h NeuroSim/MemCell.h NeuroSim/FunctionUnit.h
 FunctionUnit.o: NeuroSim/FunctionUnit.cpp NeuroSim/FunctionUnit.h
 SubArray.o: NeuroSim/SubArray.cpp NeuroSim/constant.h NeuroSim/formula.h \
  NeuroSim/Technology.h NeuroSim/typedef.h NeuroSim/SubArray.h \
@@ -104,9 +107,6 @@ NewSwitchMatrix.o: NeuroSim/NewSwitchMatrix.cpp NeuroSim/constant.h \
  NeuroSim/formula.h NeuroSim/Technology.h NeuroSim/typedef.h \
  NeuroSim/NewSwitchMatrix.h NeuroSim/FunctionUnit.h \
  NeuroSim/InputParameter.h NeuroSim/MemCell.h NeuroSim/DFF.h
-Mux.o: NeuroSim/Mux.cpp NeuroSim/constant.h NeuroSim/formula.h \
- NeuroSim/Technology.h NeuroSim/typedef.h NeuroSim/Mux.h \
- NeuroSim/InputParameter.h NeuroSim/MemCell.h NeuroSim/FunctionUnit.h
 RowDecoder.o: NeuroSim/RowDecoder.cpp NeuroSim/constant.h \
  NeuroSim/formula.h NeuroSim/Technology.h NeuroSim/typedef.h \
  NeuroSim/RowDecoder.h NeuroSim/InputParameter.h NeuroSim/MemCell.h \
@@ -138,6 +138,10 @@ Precharger.o: NeuroSim/Precharger.cpp NeuroSim/constant.h \
  NeuroSim/formula.h NeuroSim/Technology.h NeuroSim/typedef.h \
  NeuroSim/Precharger.h NeuroSim/InputParameter.h NeuroSim/MemCell.h \
  NeuroSim/FunctionUnit.h
+WLDecoderOutput.o: NeuroSim/WLDecoderOutput.cpp NeuroSim/constant.h \
+ NeuroSim/formula.h NeuroSim/Technology.h NeuroSim/typedef.h \
+ NeuroSim/WLDecoderOutput.h NeuroSim/InputParameter.h NeuroSim/MemCell.h \
+ NeuroSim/FunctionUnit.h
 DecoderDriver.o: NeuroSim/DecoderDriver.cpp NeuroSim/constant.h \
  NeuroSim/formula.h NeuroSim/Technology.h NeuroSim/typedef.h \
  NeuroSim/DecoderDriver.h NeuroSim/InputParameter.h NeuroSim/MemCell.h \
@@ -148,10 +152,6 @@ SenseAmp.o: NeuroSim/SenseAmp.cpp NeuroSim/constant.h NeuroSim/formula.h \
 Adder.o: NeuroSim/Adder.cpp NeuroSim/constant.h NeuroSim/typedef.h \
  NeuroSim/formula.h NeuroSim/Technology.h NeuroSim/Adder.h \
  NeuroSim/InputParameter.h NeuroSim/MemCell.h NeuroSim/FunctionUnit.h
-WLDecoderOutput.o: NeuroSim/WLDecoderOutput.cpp NeuroSim/constant.h \
- NeuroSim/formula.h NeuroSim/Technology.h NeuroSim/typedef.h \
- NeuroSim/WLDecoderOutput.h NeuroSim/InputParameter.h NeuroSim/MemCell.h \
- NeuroSim/FunctionUnit.h
 ReadCircuit.o: NeuroSim/ReadCircuit.cpp NeuroSim/constant.h \
  NeuroSim/formula.h NeuroSim/Technology.h NeuroSim/typedef.h \
  NeuroSim/ReadCircuit.h NeuroSim/InputParameter.h NeuroSim/MemCell.h \

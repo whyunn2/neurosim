@@ -60,6 +60,7 @@ public:
 	int nHide2;	    //// # of neurons in second hidden layer
 	double alpha1;		// Learning rate for the synapses from input to hidden layer
 	double alpha2;		// Learning rate for the synapses from hidden to output layer
+	double alpha3;      //// Learning rate for the synapses from hidden to second hidden layer
 	double maxWeight;	// Upper bound of weight value
 	double minWeight;	// Lower bound of weight value
     char* optimization_type;

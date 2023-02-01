@@ -156,13 +156,30 @@ void PrintWeightToFile(const char *str) {
 		fprintf(fp_dw1, "\n");
 	}
 	fclose(fp_dw1);
+
+	/* Print weight3 */
+	char printWeight3FileName[50];
+	sprintf(printWeight3FileName, "%s3.csv", str);
+	FILE *fp_dw3 = fopen(printWeight3FileName, "w");
+	fprintf(fp_dw3, "minWeight=%f, maxWeight=%f\n", param->minWeight, param->maxWeight);
+	for (int j = 0; j < param->nHide2; j++){
+		for (int k = 0; k < param->nHide; k++){
+      // for (int m=0;m<param->numWeightBit;m++){
+			    fprintf(fp_dw3, "%f,", weight1[j][k]);
+			    //fprintf(fp_dw1, "%.4e,", static_cast<DigitalNVM*>(arrayIH->cell[j+m][k])->maxConductance);
+		   //}
+    }
+		fprintf(fp_dw3, "\n");
+	}
+	fclose(fp_dw3);
+
 	/* Print weight2 */
 	char printWeight2FileName[50];
 	sprintf(printWeight2FileName, "%s2.csv", str);
 	FILE *fp_dw2 = fopen(printWeight2FileName, "w");
 	fprintf(fp_dw2, "minWeight=%f, maxWeight=%f\n", param->minWeight, param->maxWeight);
 	for (int j = 0; j < param->nOutput; j++){
-		for (int k = 0; k < param->nHide; k++){
+		for (int k = 0; k < param->nHide2; k++){
       //for (int m=0;m<param->numWeightBit;m++){
 			fprintf(fp_dw2, "%f,", weight2[j][k]);
 			//  fprintf(fp_dw1, "%.4e,", static_cast<DigitalNVM*>(arrayHO->cell[j+m][k])->conductance);
