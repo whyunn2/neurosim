@@ -88,10 +88,10 @@ int main() {
 	/* Initialization of NeuroSim synaptic cores */
 	param->relaxArrayCellWidth = 0;
 	NeuroSimSubArrayInitialize(subArrayIH, arrayIH, inputParameterIH, techIH, cellIH);
+	NeuroSimSubArrayInitialize(subArrayHH, arrayHH, inputParameterHH, techHH, cellHH);
 	param->relaxArrayCellWidth = 1;
 	NeuroSimSubArrayInitialize(subArrayHO, arrayHO, inputParameterHO, techHO, cellHO);
 
-	NeuroSimSubArrayInitialize(subArrayHH, arrayHH, inputParameterHH, techHH, cellHH);
 	/* Calculate synaptic core area */
 	NeuroSimSubArrayArea(subArrayIH);
 	NeuroSimSubArrayArea(subArrayHO);

@@ -1506,7 +1506,6 @@ int train_batchsize = param -> numTrainImagesPerBatch;
                             {
                                 maxWeightUpdated =fabs(actualWeightUpdated);
                             }		
-							//restart here
                         if(optimization_type == "SGD" || (batchSize+1) % train_batchsize == 0){
 							if (AnalogNVM *temp = dynamic_cast<AnalogNVM*>(arrayHO->cell[jj][k])) { // Analog eNVM
                                 arrayHO->WriteCell(jj, k, deltaWeight2[jj][k], weight2[jj][k], param->maxWeight, param->minWeight, true);
