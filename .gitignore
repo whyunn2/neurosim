@@ -9,3 +9,5 @@ patch60000_train.txt
 test10000.txt
 
 train60000.txt
+
+*.txt
