@@ -52,6 +52,9 @@ extern Param *param;
 extern std::vector< std::vector<double> > testInput;
 extern std::vector< std::vector<int> > dTestInput;
 extern std::vector< std::vector<double> > testOutput;
+extern std::vector< std::vector<double> > Input;
+extern std::vector< std::vector<int> > dInput;
+extern std::vector< std::vector<double> > Output;
 
 extern std::vector< std::vector<double> > weight1;
 extern std::vector< std::vector<double> > weight2;

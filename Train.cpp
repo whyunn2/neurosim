@@ -47,6 +47,7 @@
 #include "Array.h"
 #include "Mapping.h"
 #include "NeuroSim.h"
+#include <cstdlib>
 
 extern Param *param;
 
@@ -1511,6 +1512,7 @@ int train_batchsize = param -> numTrainImagesPerBatch;
                                 arrayHO->WriteCell(jj, k, deltaWeight2[jj][k], weight2[jj][k], param->maxWeight, param->minWeight, true);
 							    weight2[jj][k] = arrayHO->ConductanceToWeight(jj, k, param->maxWeight, param->minWeight);
 								weightChangeBatch = weightChangeBatch || static_cast<AnalogNVM*>(arrayHO->cell[jj][k])->numPulse;
+								// std::cout << static_cast<AnalogNVM*>(arrayHO->cell[jj][k])->deltaconductance << ' ';
                                 if(fabs(static_cast<AnalogNVM*>(arrayIH->cell[jj][k])->numPulse) > maxPulseNum)
                                 {
                                     maxPulseNum=fabs(static_cast<AnalogNVM*>(arrayIH->cell[jj][k])->numPulse);
@@ -1545,7 +1547,6 @@ int train_batchsize = param -> numTrainImagesPerBatch;
                         }
                         totalWeightUpdate += maxWeightUpdated;
                         totalNumPulse += maxPulseNum;
-                        
                         /* Latency for each batch write in Analog eNVM */
 						numWriteOperationPerRow += weightChangeBatch;
 						for (int jj = start; jj <= end; jj++) { // Selected cells

@@ -130,6 +130,7 @@ public:
 	double PWinitLTD;   // Initial write pulse width for LTD or weight decrease (s)
 	double PWstepLTD;   // Write pulse width for LTD or weight decrease (s)
 	double writeVoltageSquareSum;   // Sum of V^2 of non-identical pulses (for weight update energy calculation in subcircuits)
+	double deltaconductance;
 
 	virtual double Read(double voltage) = 0;
 	virtual void Write(double deltaWeightNormalized, double weight, double minWeight, double maxWeight) = 0;

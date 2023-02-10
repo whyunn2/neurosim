@@ -64,7 +64,6 @@ int main() {
 	/* Load in MNIST data */
 	ReadTrainingDataFromFile("train60000.txt", "label60000_train.txt");
 	ReadTestingDataFromFile("test10000.txt", "label10000_test.txt");
-
 	/* Initialization of synaptic array from input to hidden layer */
 	//arrayIH->Initialization<IdealDevice>();
 	arrayIH->Initialization<RealDevice>(); 

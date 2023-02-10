@@ -433,7 +433,6 @@ void RealDevice::Write(double deltaWeightNormalized, double weight, double minWe
 			writePulseWidthLTD = writeLatencyLTD / (-numPulse);
 		}
 	}
-	
 	conductancePrev = conductance;
 	conductance = conductanceNew;
 }
