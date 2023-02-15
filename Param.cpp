@@ -48,15 +48,15 @@ Param::Param() {
 	/* Algorithm parameters */
 	numTrainImagesPerEpoch = 8000;	// # of training images per epoch 
     numTrainImagesPerBatch = 1;   // # of training images per batch. It is 1 for SGD
-	totalNumEpochs = 30;	// Total number of epochs
+	totalNumEpochs = 125;	// Total number of epochs
 	interNumEpochs = 1;		// Internal number of epochs (print out the results every interNumEpochs)
 	nInput = 784;     // # of neurons in input layer
 	nHide = 256;      // # of neurons in hidden layer
 	nHide2 = 128;
 	nOutput = 10;     // # of neurons in output layer
-	alpha1 = 0.4;	// Learning rate for the weights from input to hidden layer
-	alpha2 = 0.2;	// Learning rate for the weights from hidden to output layer
-	alpha3 = 0.3;    //// Learning rate for the weights from hidden to second hidden layer
+	alpha1 = 0.5;	// Learning rate for the weights from input to hidden layer
+	alpha2 = 0.01;	// Learning rate for the weights from hidden to output layer
+	alpha3 = 0.02;    //// Learning rate for the weights from hidden to second hidden layer
 	maxWeight = 1;	// Upper bound of weight value
 	minWeight = -1;	// Lower bound of weight value
 
@@ -71,7 +71,7 @@ Param::Param() {
 	useHardwareInTrainingWU = true;   // Use hardware in the weight update part of training or not (true: realistic hardware, false: ideal software)
 	useHardwareInTraining = useHardwareInTrainingFF || useHardwareInTrainingWU;    // Use hardware in the training or not
 	useHardwareInTestingFF = true;    // Use hardware in the feed forward part of testing or not (true: realistic hardware, false: ideal software)
-	numBitInput = 1;       // # of bits of the input data (=1 for black and white data)
+	numBitInput = 4;       // # of bits of the input data (=1 for black and white data)
 	numBitPartialSum = 8;  // # of bits of the digital output (partial weighted sum output)
 	pSumMaxHardware = pow(2, numBitPartialSum) - 1;   // Max digital output value of partial weighted sum
 	numInputLevel = pow(2, numBitInput);  // # of levels of the input data
