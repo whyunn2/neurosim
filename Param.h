@@ -64,6 +64,7 @@ public:
 	double maxWeight;	// Upper bound of weight value
 	double minWeight;	// Lower bound of weight value
     char* optimization_type;
+	double th;
 
 	/* Hardware parameters */
 	bool useHardwareInTrainingFF;   // Use hardware in the feed forward part of training or not (true: realistic hardware, false: ideal software)

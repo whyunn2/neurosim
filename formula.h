@@ -52,5 +52,6 @@ double InvMeasuredLTP(double conductance, int maxNumLevel, std::vector<double>& 
 double InvMeasuredLTD(double conductance, int maxNumLevel, std::vector<double>& dataConductanceLTD);
 double getParamA(double NL);
 double NonlinearConductance(double C, double NL, double Vw, double Vr, double V);
+double threshold(double x, double th);
 
 #endif

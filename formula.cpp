@@ -41,7 +41,14 @@
 
 /* Activation function */
 double sigmoid(double x) {
-	return 1 / (1 + exp(-x));
+	return 1 / (1 + exp(1-x));
+}
+
+double threshold(double x, double th) {
+	if (fabs(x) < th)
+		return 0;
+	else
+		return x;
 }
 
 /* Truncation with a custom threshold */
