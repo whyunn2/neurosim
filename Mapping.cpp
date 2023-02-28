@@ -42,6 +42,7 @@
 #include "Param.h"
 #include "Array.h"
 #include "NeuroSim.h"
+#include "formula.h"
 
 extern Param *param;
 

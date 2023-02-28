@@ -58,7 +58,7 @@ Mapping.o: Mapping.cpp Param.h Array.h Cell.h NeuroSim.h \
  NeuroSim/CurrentSenseAmp.h NeuroSim/MultilevelSAEncoder.h \
  NeuroSim/WLNewDecoderDriver.h NeuroSim/constant.h \
  NeuroSim/NewSwitchMatrix.h NeuroSim/Adder.h NeuroSim/Mux.h \
- NeuroSim/RowDecoder.h NeuroSim/DFF.h NeuroSim/Subtractor.h
+ NeuroSim/RowDecoder.h NeuroSim/DFF.h NeuroSim/Subtractor.h formula.h
 Test.o: Test.cpp formula.h Param.h Array.h Cell.h Mapping.h NeuroSim.h \
  NeuroSim/InputParameter.h NeuroSim/typedef.h NeuroSim/MemCell.h \
  NeuroSim/Technology.h NeuroSim/SubArray.h NeuroSim/InputParameter.h \

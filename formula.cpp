@@ -41,7 +41,7 @@
 
 /* Activation function */
 double sigmoid(double x) {
-	return 1 / (1 + exp(1-x));
+	return 1 / (1 + exp(-x));
 }
 
 double threshold(double x, double th) {
